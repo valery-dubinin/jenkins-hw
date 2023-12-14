@@ -1,0 +1,23 @@
+pipeline {
+ agent any
+ stages {
+  stage('Git') {
+   steps {git 'https://github.com/netology-code/sdvps-materials.git'}
+  }
+  stage('Test') {
+   steps {
+    sh '/usr/local/go/bin/go test .'
+   }
+  }
+  stage('Build') {
+   steps {
+    sh 'go build -a -installsuffix nocgo -o app.v$BUILD_NUMBER'
+   }
+  }
+  stage('Push') {
+   steps {
+    sh 'curl -v --user 'admin:Ghbdtn-123' --upload-file ./app.v$BUILD_NUMBER http://localhost:8081/repository/my_repo2/app.v$BUILD_NUMBER'   
+   }
+  }
+ }
+}
