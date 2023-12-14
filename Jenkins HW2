@@ -16,7 +16,7 @@ pipeline {
   }
   stage('Push') {
    steps {
-    sh 'docker login localhost:8082 -u admin -p Ghbdtn-123 && docker push localhost:8082/hello-world:v$BUILD_NUMBER && docker logout'   }
+    sh 'docker login localhost:8082 -u admin -p passwd && docker push localhost:8082/hello-world:v$BUILD_NUMBER && docker logout'   }
   }
  }
 }
