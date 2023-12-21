@@ -11,12 +11,12 @@ pipeline {
   }
   stage('Build') {
    steps {
-    sh 'go build -a -installsuffix nocgo -o app.v$BUILD_NUMBER'
+    sh '/usr/local/go/bin/go build -a -installsuffix nocgo -o app.v$BUILD_NUMBER'
    }
   }
   stage('Push') {
    steps {
-    sh 'curl -v --user 'admin:passwd' --upload-file ./app.v$BUILD_NUMBER http://localhost:8081/repository/my_repo2/app.v$BUILD_NUMBER'   
+    sh 'curl -v --user admin:passwd --upload-file ./app.v$BUILD_NUMBER http://localhost:8081/repository/my_repo2/app.v$BUILD_NUMBER'   
    }
   }
  }
